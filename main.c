@@ -97,7 +97,7 @@ static void load_books(void) {
 
 static void add_control(const char *klass, const char *text, DWORD style,
                         int x, int y, int w, int h, int id) {
-    if (strcmp(klass, "BUTTON") == 0) style = (style & ~BS_TYPEMASK) | BS_OWNERDRAW;
+    style = (style & ~0x0000000F) | BS_OWNERDRAW;
     HWND c = CreateWindowExA(0, klass, text, WS_CHILD | WS_VISIBLE | style,
         x, y, w, h, hMain, (HMENU)(INT_PTR)id, GetModuleHandle(NULL), NULL);
     if (hFont) SendMessage(c, WM_SETFONT, (WPARAM)hFont, TRUE);
@@ -301,7 +301,7 @@ static void draw_colored_button(const DRAWITEMSTRUCT *dis) {
     else if (id == ID_ABOUT+1) fill = RGB(5, 150, 105);
     else if (id == ID_ABOUT+2) fill = RGB(13, 148, 136);
     else if (id == ID_CLEAR) fill = RGB(100, 116, 139);
-    else if (id == ID_SEARCH+1) fill = RGB(124, 58, 237);
+    else if (id == 1005) fill = RGB(124, 58, 237);
     else if (id == ID_SHOWALL) fill = RGB(71, 85, 105);
     else if (id == ID_UPDATE) fill = RGB(217, 119, 6);
 
